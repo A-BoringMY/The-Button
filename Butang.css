@@ -1,0 +1,42 @@
+body {
+    margin: 0; padding: 0; height: 100vh;
+    background-color: #000; overflow: hidden;
+    display: flex; justify-content: center; align-items: center;
+    font-family: 'Arial Black', sans-serif;
+    touch-action: none;
+}
+
+#status {
+    color: #00ff00; position: absolute; top: 30px;
+    font-size: 20px; text-align: center; width: 100%; z-index: 10;
+}
+
+#prankBtn {
+    width: 65px; height: 65px;
+    background-color: red; color: white;
+    font-size: 10px; font-weight: bold;
+    border: 3px solid white; border-radius: 50%;
+    position: absolute;
+    left: 0; top: 0;
+    z-index: 100;
+    cursor: pointer;
+    box-shadow: 0 0 20px red;
+    will-change: transform;
+    animation: lariGila 1s infinite linear;
+}
+
+@keyframes lariGila {
+    0%   { transform: translate3d(var(--x1), var(--y1), 0); }
+    33%  { transform: translate3d(var(--x2), var(--y2), 0); }
+    66%  { transform: translate3d(var(--x3), var(--y3), 0); }
+    100% { transform: translate3d(var(--x1), var(--y1), 0); }
+}
+
+#videoLayer {
+    display: none; position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: black; z-index: 200;
+    justify-content: center; align-items: center;
+}
+
+video { width: 100%; height: 100%; object-fit: cover; }

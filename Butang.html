@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>The Ultimate Scam - 3 Fasa</title>
+    <link rel="stylesheet" href="Butang.css">
+</head>
+<body onclick="bunyiSonic()">
+
+    <h1 id="status">SPAM TAP UNTUK MENANG! ⚡</h1>
+
+    <button id="prankBtn">TAP!</button>
+
+    <div id="videoLayer">
+        <video id="marioVid" playsinline>
+            <source src="Job.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <audio id="sonicAudio" src="AAAAUUUGHHHH Meme Sound Effect - Sherk.mp3">
+
+    <script>
+        const v = document.getElementById('marioVid');
+        const s = document.getElementById('sonicAudio'); 
+        const b = document.getElementById('prankBtn');
+        const st = document.getElementById('status');
+
+        let fasaDua = false; 
+        let fasaTiga = false; // Fasa REAL
+        let klikFasaDua = 0; 
+        let klikFasaTiga = 0;
+        const HAD_AKHIR = 5;
+        let currentSpeed = 1.0; 
+
+        function tukarPosisi() {
+            const rW = () => Math.floor(Math.random() * 75) + 5;
+            const rH = () => Math.floor(Math.random() * 75) + 5;
+            document.documentElement.style.setProperty('--x1', rW() + 'vw');
+            document.documentElement.style.setProperty('--y1', rH() + 'vh');
+            document.documentElement.style.setProperty('--x2', rW() + 'vw');
+            document.documentElement.style.setProperty('--y2', rH() + 'vh');
+            document.documentElement.style.setProperty('--x3', rW() + 'vw');
+            document.documentElement.style.setProperty('--y3', rH() + 'vh');
+        }
+
+        b.addEventListener('animationiteration', tukarPosisi);
+        tukarPosisi();
+
+        function bunyiSonic() {
+            s.currentTime = 0;
+            s.play().catch(() => {});
+        }
+
+        b.onclick = function(e) {
+            e.stopPropagation();
+
+            // --- FASA 1 (Cari Peluang 10%) ---
+            if (!fasaDua && !fasaTiga) {
+                currentSpeed *= 0.95; 
+                b.style.animationDuration = currentSpeed + "s";
+
+                if (Math.random() < 0.1) {
+                    fasaDua = true;
+                    st.innerText = "PELUANG MUNCUL! 5 KALI LAGI! 🔥";
+                    st.style.color = "yellow";
+                    currentSpeed = 0.5;
+                    b.style.animationDuration = currentSpeed + "s";
+                } else {
+                    st.innerText = "KENA PUN! 😂";
+                    st.style.color = "cyan";
+                    setTimeout(() => {
+                        if(!fasaDua) {
+                            st.innerText = "SPAM TAP UNTUK MENANG! ⚡";
+                            st.style.color = "#00ff00";
+                        }
+                    }, 800);
+                }
+            } 
+            // --- FASA 2 (FAKE COUNTDOWN 5 KLIK) ---
+            else if (fasaDua && !fasaTiga) {
+                klikFasaDua++;
+                let baki = HAD_AKHIR - klikFasaDua;
+                currentSpeed = Math.max(0.3, currentSpeed - 0.05);
+                b.style.animationDuration = currentSpeed + "s";
+
+                if (klikFasaDua >= HAD_AKHIR) {
+                    fasaDua = false;
+                    fasaTiga = true; // Masuk fasa Real
+                    st.innerText = "SIKIT LAGI!!! 5 KALI LAGI! 💀";
+                    st.style.color = "#ff0000"; // Tukar merah (tanda bahaya)
+                    currentSpeed = 0.25; // Makin gila laju
+                    b.style.animationDuration = currentSpeed + "s";
+                } else {
+                    st.innerText = "CEPAT!!! LAGI " + baki + " KALI! 💀";
+                    st.style.color = "#ff00ff";
+                }
+            }
+            // --- FASA 3 (REAL COUNTDOWN - FINAL) ---
+            else if (fasaTiga) {
+                klikFasaTiga++;
+                let bakiReal = HAD_AKHIR - klikFasaTiga;
+                
+                // Kelajuan paling maksimum (Mustahil punya laju)
+                currentSpeed = Math.max(0.18, currentSpeed - 0.03); 
+                b.style.animationDuration = currentSpeed + "s";
+
+                if (klikFasaTiga >= HAD_AKHIR) {
+                    document.getElementById('videoLayer').style.display = 'flex';
+                    v.play();
+                    b.style.display = 'none';
+                    st.style.display = 'none';
+                } else {
+                    st.innerText = "HAMPIR MENANG!!! " + bakiReal + " KALI!! 🔥";
+                    st.style.color = "orange";
+                }
+            }
+        };
+    </script>
+</body>
+</html>
